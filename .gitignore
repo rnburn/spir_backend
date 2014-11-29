@@ -26,3 +26,7 @@
 *.exe
 *.out
 *.app
+
+# swap files
+*.swo
+*.sp

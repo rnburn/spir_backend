@@ -1,2 +1,0 @@
-namespace spir_backend {
-}

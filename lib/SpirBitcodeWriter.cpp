@@ -1,3 +1,4 @@
+#include "llvm/SpirBackend/SpirBitcodeWriter.h"
 #include "ValueEnumerator.h"
 #include <llvm/Bitcode/ReaderWriter.h>
 #include <llvm/ADT/Triple.h>
@@ -171,7 +172,7 @@ static void WriteAttributeTable(const ValueEnumerator &VE,
       Record.push_back(Encoding);
     }
 
-    Stream.EmitRecord(bitc::PARAMATTR_CODE_ENTRY, Record);
+    Stream.EmitRecord(bitc::PARAMATTR_CODE_ENTRY_OLD, Record);
     Record.clear();
   }
 
@@ -1862,9 +1863,9 @@ static void EmitDarwinBCHeaderAndTrailer(SmallVectorImpl<char> &Buffer,
     Buffer.push_back(0);
 }
 
-/// WriteBitcodeToFile - Write the specified module to the specified output
+/// WriteSpirBitcodeToFile - Write the specified module to the specified output
 /// stream.
-void WriteBitcodeToFile(const Module *M, raw_ostream &Out) {
+void llvm::WriteSpirBitcodeToFile(const Module *M, raw_ostream &Out) {
   SmallVector<char, 1024> Buffer;
   Buffer.reserve(256*1024);
 
